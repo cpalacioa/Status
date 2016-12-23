@@ -9,12 +9,21 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testSaveStatusMessage()
     {
-        $this->get('/');
-
-        $this->assertEquals(
-            $this->response->getContent(), $this->app->version()
-        );
+        $this->json('POST', '/api/v1/status', ['status' => 'Mensaje de prueba']);
     }
+    public function testGetStatusMessageById()
+    {
+        $this->json('POST', '/api/v1/status/1');
+    }
+    public function testGetStatusMessageByString()
+    {
+        $this->json('POST', '/api/v1/status/mensaje');
+    }
+    public function testDeleteStatusMessageById()
+    {
+        $this->json('Delete', '/api/v1/status/1');
+    }
+
 }
